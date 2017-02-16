@@ -25,26 +25,23 @@ public class Robot extends IterativeRobot {
 
 	
 	public static Joystick stick;
-	DriveTrain chassis;
-	VisionSystem vision;
-	OrientLoop loop;
-	
-	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static DriveTrain chassis;
+	public static VisionSystem vision;
+	public static OrientLoop loop;
 	public static OI oi;
 
-	
 
 	
 	@Override
 	public void robotInit() {
 		
-		oi = new OI(this);
+		oi = new OI();
+		
+		
 		
 		vision = new VisionSystem();
-		
-		
-		stick = new Joystick(1);
-		chassis = new DriveTrain(stick, 1, 0);
+		stick = new Joystick(RobotMap.DRIVE_STICK);
+		chassis = new DriveTrain(stick, RobotMap.LEFT_MOTOR_PWM, RobotMap.RIGHT_MOTOR_PWM);
 		loop = new OrientLoop(RobotMap.ORIENT_P,RobotMap.ORIENT_I,RobotMap.ORIENT_D, chassis);
 		
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -78,18 +75,15 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	
-	AutoOrient b;
-	SimpleBoilTrack c;
+	DT_AutoOrient b;
+	DT_SimpleBoilTrack c;
 	@Override
 	public void autonomousInit() {
 		//b = new AutoOrient(chassis,loop,45,false);
 		//b.start();
 		
-		
-		
-		c = new SimpleBoilTrack(chassis, loop, vision);
+		c = new DT_SimpleBoilTrack(chassis, loop, vision);
 		c.start();
-		
 		
 		SmartDashboard.putBoolean("AutoRan", false);
 		
@@ -122,8 +116,8 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		if(stick.getRawButton(1) && chassis.getCurrentCommand() instanceof JoystickDrive){
-			TurnToTarget a = new TurnToTarget(chassis,loop,vision);
+		if(stick.getRawButton(1) && chassis.getCurrentCommand() instanceof DT_JoystickDrive){
+			DT_TurnToTarget a = new DT_TurnToTarget(chassis,loop,vision);
 			a.start();
 		}
 		

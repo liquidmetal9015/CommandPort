@@ -1,58 +1,67 @@
 package org.usfirst.frc.team2682.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team2682.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2682.robot.subsystems.OrientLoop;
-import org.usfirst.frc.team2682.robot.*;
-
+import org.usfirst.frc.team2682.robot.subsystems.VisionSystem;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.lang.Math;
 /**
  *
  */
-public class AutoOrient extends Command {
+public class DT_SimpleBoilTrack extends Command {
 
 	DriveTrain chassis;
 	double targetAngle;
 	OrientLoop loop;
-	boolean relative;
+	VisionSystem visSys;
 	
-    public AutoOrient(DriveTrain a, OrientLoop b, double angle, boolean rel) {
+	
+    public DT_SimpleBoilTrack(DriveTrain a, OrientLoop b, VisionSystem v) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	
+    	
+    	
     	chassis = a;
-    	//loop = b;
+    	loop = b;
+    	visSys = v;
     	requires(chassis);
-    	//requires(loop);
-    	targetAngle = angle;
     	
-    	relative = rel;
     	
-    	SmartDashboard.putNumber("HasStarted", 234);
+    	
     	
     }
 
     // Called just before this Command runs the first time
-    
-    //TargetLoop target;
-    
     protected void initialize() {
-    	//target = new TargetLoop(chassis, loop, targetAngle, relative);
-    	//target.start();
-    	
-    	loop.getPIDController().setSetpoint(targetAngle);
-    	
-    	//System.out.println(targetAngle);
-    	//System.out.println(relative);
-    	//SmartDashboard.putNumber("TargetAngle", targetAngle);
     	
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
     
+    DT_AutoOrient runner;
+    boolean hat = true;
+    
+    protected void execute() {	
+    	
+    	SmartDashboard.putNumber("Current Angle", chassis.getRotation());
+    	SmartDashboard.putNumber("Target X Value", visSys.getBoilX());
+    	SmartDashboard.putNumber("Target Angle", visSys.getBoilAngle());
+    	
+    	SmartDashboard.putNumber("PID Error", loop.getPIDController().getError());
+    	SmartDashboard.putNumber("PID output", chassis.getPIDValue());
+    	SmartDashboard.putBoolean("OnTarget?", loop.getPIDController().onTarget());
+    	
+    	
+    	
+    	loop.setTargetRelative(visSys.getBoilAngle());
+    	
+    	
     	chassis.getDrive().arcadeDrive(0, chassis.getPIDValue());
+    	
+    	
     	
     }
 
@@ -68,6 +77,5 @@ public class AutoOrient extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	SmartDashboard.putNumber("Was interrupted", 345);
     }
 }

@@ -3,7 +3,7 @@ package org.usfirst.frc.team2682.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
-import org.usfirst.frc.team2682.robot.commands.JoystickDrive;
+import org.usfirst.frc.team2682.robot.commands.DT_JoystickDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
@@ -57,7 +57,7 @@ public class DriveTrain extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new JoystickDrive(this, defaultStick));
+    	setDefaultCommand(new DT_JoystickDrive(this, defaultStick));
     }
     
     

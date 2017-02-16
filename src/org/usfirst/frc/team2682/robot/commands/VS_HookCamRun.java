@@ -2,30 +2,29 @@ package org.usfirst.frc.team2682.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2682.robot.subsystems.VisionSystem;
+
 /**
  *
  */
-public class BoilCamRun extends Command {
+public class VS_HookCamRun extends Command {
 
-	VisionSystem visSystem;
 	
-    public BoilCamRun(VisionSystem a) {
+	VisionSystem visSys;
+	
+    public VS_HookCamRun(VisionSystem a) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	visSystem = a;
-    	requires(visSystem);
-    	
+    	visSys = a;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	visSystem.setBoil();
+    	visSys.setHook();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	visSystem.updateBoil();
-    	
+    	visSys.updateHook();
     }
 
     // Make this return true when this Command no longer needs to run execute()

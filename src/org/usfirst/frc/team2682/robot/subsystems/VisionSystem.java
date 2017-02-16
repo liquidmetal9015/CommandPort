@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Command;
 
 
-import org.usfirst.frc.team2682.robot.commands.BoilCamRun;
-import org.usfirst.frc.team2682.robot.commands.HookCamRun;
+import org.usfirst.frc.team2682.robot.commands.VS_BoilCamRun;
+import org.usfirst.frc.team2682.robot.commands.VS_HookCamRun;
 
 /**
  *
@@ -53,7 +53,7 @@ public class VisionSystem extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new BoilCamRun(this));
+    	setDefaultCommand(new VS_BoilCamRun(this));
     }
     
     

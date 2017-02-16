@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class TurnToTarget extends Command {
+public class DT_TurnToTarget extends Command {
 
 	
 	Timer time;
@@ -33,7 +33,7 @@ public class TurnToTarget extends Command {
 	
 	double[] target = {0,0,0,0,0,0,0,0};
 	
-    public TurnToTarget(DriveTrain a, OrientLoop b, VisionSystem v) {
+    public DT_TurnToTarget(DriveTrain a, OrientLoop b, VisionSystem v) {
 
     	chassis = a;
     	loop = b;

@@ -1,38 +1,31 @@
 package org.usfirst.frc.team2682.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive.MotorType;
-
-import org.usfirst.frc.team2682.robot.subsystems.DriveTrain;
-
+import org.usfirst.frc.team2682.robot.subsystems.VisionSystem;
 /**
  *
  */
-public class JoystickDrive extends Command {
+public class VS_BoilCamRun extends Command {
 
-	DriveTrain chassis;
-	Joystick stick;
+	VisionSystem visSystem;
 	
-    public JoystickDrive(DriveTrain a, Joystick b) {
+    public VS_BoilCamRun(VisionSystem a) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	chassis = a;
-    	stick = b;
-    	requires(chassis);
-    	
+    	visSystem = a;
+    	requires(visSystem);
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	
+    	visSystem.setBoil();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	chassis.getDrive().arcadeDrive(stick.getY(), stick.getX());
+    	visSystem.updateBoil();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

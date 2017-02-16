@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class JoyPoint extends AutoOrient {
+public class DT_JoyPoint extends DT_AutoOrient {
 
-	public JoyPoint(DriveTrain a, OrientLoop b, double angle, boolean rel){
-	  super(a,b,angle,rel);
+	public DT_JoyPoint(double angle, boolean rel){
+	  super(angle,rel);
 	}
 	
     // Called repeatedly when this Command is scheduled to run
